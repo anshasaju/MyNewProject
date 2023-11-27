@@ -1,0 +1,177 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Persons</h2>
+        <table class="table mt-4">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Category</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of userItems; let i = index">
+                <td>{{ item.Name }}</td>
+                <td>{{ item.Age }}</td>
+                <td>{{ item.Category }}</td>
+                <td>
+                    <button
+                        type="button"
+                        class="btn btn-info mx-1"
+                        (click)="EditSelectedUser(item)"
+                    >
+                        Edit
+                    </button>
+                <!-- </td>
+                <td> -->
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="deletePerson(item.Id)"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        <!-- <ul class="list-group">
+          <li
+            *ngFor="let person of userItems"
+            class="list-group-item d-flex justify-content-between align-items-center"
+          >
+            {{ person.Name }} ({{ person.Age }} years old)
+            <div>
+              <button
+                class="btn btn-sm btn-info mx-1"
+                (click)="SelectedUsers = person"
+              >
+                Edit
+              </button>
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="deletePerson(person.Id)"
+              >
+                Delete
+              </button>
+            </div>
+          </li>
+        </ul> -->
+        <button class="btn btn-primary mt-3" (click)="addNewPerson()">
+          Add Person
+        </button>
+        <!-- <div *ngIf="isAdding">
+          <h3>Add New Person</h3>
+          <form>
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                required
+                [(ngModel)]="newPersonName"
+                name="name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="age"
+                required
+                [(ngModel)]="newPersonAge"
+                name="age"
+              />
+            </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select
+                  class="form-control"
+                  id="category"
+                  [(ngModel)]="categoryName"
+                  name="name"
+                  
+                >
+                  <option value="option1">Option 1</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </select>
+              </div>
+            <button
+              class="btn btn-success"
+              (click)="addItem(newPersonName, newPersonAge, categoryName)"
+            >
+              Save
+            </button>
+            <button class="btn btn-secondary ml-2" (click)="isAdding = false">
+              Cancel
+            </button>
+          </form>
+        </div> -->
+      </div>
+      <div class="col-md-6" *ngIf="displayDialog == true">
+        <h2 *ngIf="!isAdding">Edit Person</h2>
+        <h2 *ngIf="isAdding">Add Person</h2>
+        <form>
+          <div class="form-group">
+            <label for="editName">Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="editName"
+              required
+              [(ngModel)]="SelectedUsers.Name"
+              name="editName"
+            />
+          </div>
+          <div class="form-group">
+            <label for="editAge">Age:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="editAge"
+              required
+              [(ngModel)]="SelectedUsers.Age"
+              name="editAge"
+            />
+          </div>
+          <div class="form-group">
+            <label for="category">Category:</label>
+            <select
+              class="form-control"
+              id="category"
+              [(ngModel)]="SelectedUsers.Category"
+              name="name"
+              
+            >
+              <option value="option1">Option 1</option>
+              <option value="option2">Option 2</option>
+              <option value="option3">Option 3</option>
+            </select>
+          </div>
+          <button
+              class="btn btn-success"
+              (click)="addItem(SelectedUsers)"
+              *ngIf="isAdding == true"
+            >
+              Save
+            </button>
+          <button
+            class="btn btn-success"
+            (click)="updatePerson(SelectedUsers)"
+            *ngIf="isAdding == false"
+          >
+            Update
+          </button>
+          <button class="btn btn-secondary ml-2" (click)="displayDialog = false">
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
